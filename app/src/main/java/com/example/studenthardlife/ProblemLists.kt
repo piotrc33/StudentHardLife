@@ -1,9 +1,5 @@
 package com.example.studenthardlife
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import kotlin.random.Random
-
 object ProblemLists {
     var data: ArrayList<ProblemList> = arrayListOf();
 
