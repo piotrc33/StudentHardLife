@@ -5,21 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class DetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var detailAdapter: DetailAdapter
-    private lateinit var listPosition: Number
-    private lateinit var list: ProblemList
+//    private lateinit var listPosition: Number
+//    private lateinit var list: ProblemList
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let { listPosition = it.getInt("listPosition") }
-        list = ProblemLists.data[listPosition.toInt()]
+//        arguments?.let { listPosition = it.getInt("listPosition") }
+//        list = ProblemLists.data[listPosition.toInt()]
     }
 
 
@@ -33,7 +33,7 @@ class DetailFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        detailAdapter = DetailAdapter(list.problems)
+        detailAdapter = DetailAdapter()
         recyclerView.adapter = detailAdapter
 
         return view

@@ -9,15 +9,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 
 // Adapter is a file that manages data displayed onto recycler view, creating and binding view holders
-class ProblemListsAdapter(private val problemLists: ArrayList<ProblemList>) :
+class ProblemListsAdapter() :
     RecyclerView.Adapter<ProblemListsAdapter.ProblemListViewHolder>() {
     class ProblemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        //        val imageView : ImageView = itemView.findViewById(R.id.imageView)
         val titleTextView: TextView = itemView.findViewById(R.id.problem_list_title)
+        val problemListCardView: CardView = itemView.findViewById(R.id.problem_list_card_view)
+    }
 
-        //        val dateTextView : TextView = itemView.findViewById(R.id.crime_date)
-        val crimeCardView: CardView = itemView.findViewById(R.id.problem_list_card_view)
-//        private val viewModel = ViewModelProvider(MainAc)[CrimeViewModel::class.java]
+    private var problemLists : List<ProblemList> = listOf()
+
+    fun setData(newProblemLists: List<ProblemList>) {
+        this.problemLists = newProblemLists
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemListViewHolder {
@@ -27,23 +30,18 @@ class ProblemListsAdapter(private val problemLists: ArrayList<ProblemList>) :
     }
 
     override fun onBindViewHolder(holder: ProblemListViewHolder, position: Int) {
-//        val crime = crimeList[position]
         val list = problemLists[position]
-        holder.titleTextView.text = list.name
-//        holder.dateTextView.text = .date
-//        if(crime.isSolved)
-//            holder.imageView.setImageResource(R.drawable.checkmark)
-//        else
-//            holder.imageView.setImageResource(0)
+        holder.titleTextView.text = list.listName
 
-        holder.crimeCardView.setOnClickListener {
+        holder.problemListCardView.setOnClickListener {
             // argument has to be set on target fragment
             val action = ProblemListsFragmentDirections.actionProblemListsFragmentToDetailFragment(
-                listPosition = position
+                listPosition = position // passing argument to next fragment
             )
-            holder.crimeCardView.findNavController()
+
+            // navigating to next fragment
+            holder.problemListCardView.findNavController()
                 .navigate(action)
-//            handler.handleUserData(crime)
         }
     }
 
@@ -51,3 +49,43 @@ class ProblemListsAdapter(private val problemLists: ArrayList<ProblemList>) :
         return problemLists.size
     }
 }
+
+//class ProblemListsAdapter : ListAdapter<ProblemList, ProblemListsAdapter.ProblemListViewHolder>(ProblemListsComparator()) {
+//
+//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemListViewHolder {
+//        println("Siemanko")
+//        return ProblemListViewHolder.create(parent)
+//    }
+//
+//    override fun onBindViewHolder(holder: ProblemListViewHolder, position: Int) {
+//        val current = getItem(position)
+//        holder.bind(current.listName)
+//    }
+//
+//    class ProblemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+//        private val problemListItemView: TextView = itemView.findViewById(R.id.problem_list_title)
+//
+//        fun bind(text: String?) {
+//            problemListItemView.text = text
+//        }
+//
+//        companion object {
+//            fun create(parent: ViewGroup): ProblemListViewHolder {
+//                val view: View = LayoutInflater.from(parent.context)
+//                    .inflate(R.layout.problem_list_item, parent, false)
+//                return ProblemListViewHolder(view)
+//            }
+//        }
+//    }
+//
+//    class ProblemListsComparator : DiffUtil.ItemCallback<ProblemList>() {
+//        override fun areItemsTheSame(oldItem: ProblemList, newItem: ProblemList): Boolean {
+//            return oldItem === newItem
+//        }
+//
+//        override fun areContentsTheSame(oldItem: ProblemList, newItem: ProblemList): Boolean {
+//            return oldItem.listName == newItem.listName
+//        }
+//    }
+//}
+

@@ -28,5 +28,23 @@
         <argument
             android:name="listPosition"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_detailFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.studenthardlife.UpdateFragment"
+        android:label="Update Problem"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="problemPosition"
+            app:argType="integer" />
+        <argument
+            android:name="listPosition"
+            app:argType="integer" />
     </fragment>
 </navigation>
