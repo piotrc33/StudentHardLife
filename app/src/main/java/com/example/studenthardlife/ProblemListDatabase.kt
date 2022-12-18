@@ -15,6 +15,7 @@ import androidx.room.RoomDatabase
 abstract class ProblemListDatabase : RoomDatabase() {
 
     abstract fun problemListDao(): ProblemListDao
+    abstract fun problemDao(): ProblemDao
 
     companion object {
         @Volatile

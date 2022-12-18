@@ -10,20 +10,20 @@ import androidx.navigation.ui.setupActionBarWithNavController
 class MainActivity : AppCompatActivity() {
 
     private lateinit var navController : NavController
-    private val problemListsViewModel : ProblemListsViewModel by viewModels()
+//    private val problemListsViewModel : ProblemListsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val adapter = ProblemListsAdapter()
+//        val adapter = ProblemListsAdapter()
 
-        problemListsViewModel.getAllProblemLists.observe(this) { problemLists ->
-            problemLists?.let { adapter.setData(it) }
-        }
+//        problemListsViewModel.getAllProblemLists.observe(this) { problemLists ->
+//            problemLists?.let { adapter.setData(it) }
+//        }
 
 //        problemListsViewModel.insert(ProblemList("List2"))
+//        problemListsViewModel.insertProblem(Problem(0, "problemos", "aplikacja", "List1"))
 
-//        println("Siemanko")
 //        val db = ProblemListDatabase.getDatabase(applicationContext)
 //        ProblemLists.initialize()
 

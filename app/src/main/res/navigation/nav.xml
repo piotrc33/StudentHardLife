@@ -25,12 +25,15 @@
             app:destination="@id/problemListsFragment"
             app:popUpTo="@id/problemListsFragment"
             app:popUpToInclusive="true" />
-        <argument
-            android:name="listPosition"
-            app:argType="integer" />
         <action
             android:id="@+id/action_detailFragment_to_updateFragment"
             app:destination="@id/updateFragment" />
+        <argument
+            android:name="listName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_detailFragment_to_addProblemFragment"
+            app:destination="@id/addProblemFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
@@ -46,5 +49,17 @@
         <argument
             android:name="listPosition"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProblemFragment"
+        android:name="com.example.studenthardlife.AddProblemFragment"
+        android:label="fragment_add_problem"
+        tools:layout="@layout/fragment_add_problem" >
+        <action
+            android:id="@+id/action_addProblemFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <argument
+            android:name="listName"
+            app:argType="string" />
     </fragment>
 </navigation>

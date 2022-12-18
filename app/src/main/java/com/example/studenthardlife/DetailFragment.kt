@@ -5,21 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var detailAdapter: DetailAdapter
-//    private lateinit var listPosition: Number
-//    private lateinit var list: ProblemList
+    private lateinit var problemListsViewModel: ProblemListsViewModel
+    private lateinit var parentListName : String
+    private lateinit var addButton : FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        arguments?.let { listPosition = it.getInt("listPosition") }
-//        list = ProblemLists.data[listPosition.toInt()]
+        arguments?.let { parentListName = it.getString("listName").toString() }
     }
 
 
@@ -33,8 +37,21 @@ class DetailFragment : Fragment() {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        detailAdapter = DetailAdapter()
+        // If change happens to database then update local copy
+        problemListsViewModel = ViewModelProvider(this).get(ProblemListsViewModel::class.java)
+        problemListsViewModel.getAllProblems.observe(viewLifecycleOwner, Observer {problems ->
+            detailAdapter.setData(problems)
+        })
+
+        detailAdapter = DetailAdapter(parentListName)
         recyclerView.adapter = detailAdapter
+
+        addButton = view.findViewById(R.id.fab_add)
+        addButton.setOnClickListener {
+            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAddProblemFragment(
+                listName = parentListName
+            ))
+        }
 
         return view
     }

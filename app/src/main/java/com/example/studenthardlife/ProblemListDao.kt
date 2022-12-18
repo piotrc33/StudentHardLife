@@ -9,13 +9,14 @@ interface ProblemListDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProblemList(problemList: ProblemList)
 
-//    @Insert(onConflict = OnConflictStrategy.IGNORE)
-//    suspend fun insertProblem(problem: Problem)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertProblem(problem: Problem)
 
     @Query("SELECT * FROM problem_list_table")
     fun getProblemLists(): LiveData<List<ProblemList>>
 
-//    @Transaction
-//    @Query("SELECT * FROM problem WHERE listName = :listName")
-//    suspend fun getProblemListWithProblems(listName: String): LiveData<List<ProblemListWithProblems>>
+    @Transaction
+    @Query("SELECT * FROM problem_list_table WHERE listName = :listName")
+    // suspend?
+    fun getProblemListWithProblems(listName: String): LiveData<List<ProblemListWithProblems>>
 }

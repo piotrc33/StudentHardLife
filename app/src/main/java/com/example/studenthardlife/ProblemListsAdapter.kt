@@ -36,10 +36,10 @@ class ProblemListsAdapter() :
         holder.problemListCardView.setOnClickListener {
             // argument has to be set on target fragment
             val action = ProblemListsFragmentDirections.actionProblemListsFragmentToDetailFragment(
-                listPosition = position // passing argument to next fragment
+                listName = list.listName // passing argument to next fragment
             )
 
-            // navigating to next fragment
+            // navigating to next fragment with defined action
             holder.problemListCardView.findNavController()
                 .navigate(action)
         }

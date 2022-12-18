@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 // Fragments are files between which jetpack navigation is possible
 class ProblemListsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-//    private val problemLists: ArrayList<ProblemList> = ProblemLists.data
     private lateinit var problemListsAdapter: ProblemListsAdapter
     private lateinit var problemListsViewModel: ProblemListsViewModel
 
@@ -35,7 +34,6 @@ class ProblemListsFragment : Fragment() {
 
         problemListsAdapter = ProblemListsAdapter()
         recyclerView.adapter = problemListsAdapter
-//        println("Siemanko z Fragmentu")
 
         return view
     }
