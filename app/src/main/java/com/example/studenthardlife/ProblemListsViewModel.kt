@@ -29,5 +29,16 @@ class ProblemListsViewModel(application: Application) : AndroidViewModel(applica
             db.problemDao().insertProblem(problem)
         }
     }
+    fun updateProblem(problem: Problem) {
+        viewModelScope.launch{
+            db.problemDao().updateProblem(problem)
+        }
+    }
+
+    fun deleteProblem(problem: Problem) {
+        viewModelScope.launch{
+            db.problemDao().deleteProblem(problem)
+        }
+    }
 
 }

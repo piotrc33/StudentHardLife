@@ -38,6 +38,32 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_problem_title"
             app:layout_constraintVertical_bias="0.115" />
 
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EDIT"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_problem_description"
+            app:layout_constraintVertical_bias="0.198" />
+
+
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_button"
+            app:layout_constraintVertical_bias="0.088" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

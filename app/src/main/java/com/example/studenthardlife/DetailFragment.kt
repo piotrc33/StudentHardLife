@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -19,6 +20,8 @@ class DetailFragment : Fragment() {
     private lateinit var problemListsViewModel: ProblemListsViewModel
     private lateinit var parentListName : String
     private lateinit var addButton : FloatingActionButton
+    private lateinit var cameraButton : FloatingActionButton
+    private lateinit var editButton : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,13 @@ class DetailFragment : Fragment() {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAddProblemFragment(
                 listName = parentListName
             ))
+        }
+
+        cameraButton = view.findViewById(R.id.fab_camera)
+        cameraButton.setOnClickListener {
+//            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAddProblemFragment(
+//                listName = parentListName
+//            ))
         }
 
         return view

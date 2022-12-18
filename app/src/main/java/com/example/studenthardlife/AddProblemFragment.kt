@@ -42,7 +42,6 @@ class AddProblemFragment : Fragment() {
     }
 
     private fun submitProblem() {
-//        val firstName
         val title: String = newProblemTitleEditText.text.toString()
         val description: String = newProblemDescriptionEditText.text.toString()
 
