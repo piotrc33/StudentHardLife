@@ -19,10 +19,11 @@ class DetailAdapter(private val parentListName: String) :
         val problemCardView: CardView = itemView.findViewById(R.id.problem_card_view)
     }
 
-    // list of all problems from all lists
+    // list of all problems from current list(previously filtered)
     private var problems: List<Problem> = listOf()
 
     fun setData(newProblems: List<Problem>) {
+        // filtering for specific list
         this.problems = newProblems.filter { it.listName == parentListName }
         notifyDataSetChanged()
     }
@@ -34,13 +35,13 @@ class DetailAdapter(private val parentListName: String) :
     }
 
     override fun onBindViewHolder(holder: DetailViewHolder, position: Int) {
-//        val problemsFiltered = problems.filter { it.listName == parentListName }
-        var problem : Problem
+        val problem : Problem
         if (problems.isNotEmpty()) {
             problem = problems[position]
             holder.titleTextView.text = problem.problemTitle
             holder.descriptionTextView.text = problem.description
 
+            // passing all required information for editing problem
             holder.editButton.setOnClickListener {
                 holder.problemCardView.findNavController()
                     .navigate(DetailFragmentDirections.actionDetailFragmentToUpdateFragment(
@@ -52,24 +53,6 @@ class DetailAdapter(private val parentListName: String) :
             }
         }
 
-
-//        editButton = view.findViewById(R.id.edit_icon)
-//        editButton.setOnClickListener {
-////            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToUpdateFragment()
-//        }
-
-//        holder.
-
-//        holder.problemCardView.setOnClickListener {
-//            val action = DetailFragmentDirections.actionDetailFragmentToUpdateFragment(
-//                problemPosition = position, // passing argument to next fragment
-//                listPosition = listPosition.toInt()
-//            )
-//
-////             navigating to next fragment
-//            holder.problemCardView.findNavController()
-//                .navigate(action)
-//        }
     }
 
     override fun getItemCount(): Int {

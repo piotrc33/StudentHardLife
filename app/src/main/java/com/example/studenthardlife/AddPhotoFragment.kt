@@ -31,25 +31,26 @@ import java.util.*
 class AddPhotoFragment : Fragment() {
 
     private lateinit var binding: FragmentAddPhotoBinding
+
+    // uri holding a path to added picture
     private lateinit var pictureAbsolutePath: Uri
 
     private val problemListsViewModel: ProblemListsViewModel by viewModels()
 
-
+    // Name of list to which a photo is being added
     private lateinit var listName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // setting navigation arguments
         arguments?.let {
             listName = it.getString("listName").toString()
         }
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentAddPhotoBinding.inflate(inflater, container, false)
 
         binding.photoButton.setOnClickListener {
@@ -57,24 +58,27 @@ class AddPhotoFragment : Fragment() {
         }
 
         binding.saveButton.setOnClickListener {
-            if (checkForErrors())
-                Toast.makeText(
-                    context,
-                    "Action failed",
-                    Toast.LENGTH_LONG
-                ).show()
+            // showing toast on fail
+            if (checkForErrors()) Toast.makeText(
+                context, "Action failed", Toast.LENGTH_LONG
+            ).show()
             else {
-                // creating updated problemList with proper image path
-                val updatedProblemList =
-                    ProblemList(listName, pictureAbsolutePath.toString())
-                problemListsViewModel.updateList(updatedProblemList)
+                // updating the list by adding picture path to id
+                problemListsViewModel.updateList(
+                    ProblemList(
+                        listName, pictureAbsolutePath.toString()
+                    )
+                )
             }
+
+            // navigating back
             findNavController().navigate(AddPhotoFragmentDirections.actionAddPhotoFragmentToProblemListsFragment())
         }
 
         return binding.root
     }
 
+    // requsting for camera permission
     private val requestCameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) {
@@ -83,6 +87,7 @@ class AddPhotoFragment : Fragment() {
         }
     }
 
+    // camera intent starting value
     private val resultLauncherCamera = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
@@ -98,34 +103,27 @@ class AddPhotoFragment : Fragment() {
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.CAMERA
-            ) ==
-                    PackageManager.PERMISSION_GRANTED -> {
-                launchCamera() // włączam aplikację przez implicit intent
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                launchCamera() // if app has all permissions launchCamera
             }
             ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
-                Manifest.permission.CAMERA
+                requireActivity(), Manifest.permission.CAMERA
             ) -> {
                 showMessageOKCancel(getString(R.string.rationale_camera)) // Rationale
             }
             else -> {
-                requestCameraPermissionLauncher
-                    .launch(Manifest.permission.CAMERA) // jeżeli nie to nic nie robię
+                requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA) // jeżeli nie to nic nie robię
             }
         }
     }
 
 
     private fun showMessageOKCancel(message: String) {
-        AlertDialog.Builder(requireContext())
-            .setMessage(message)
+        AlertDialog.Builder(requireContext()).setMessage(message)
             .setPositiveButton("OK") { dialogInterface: DialogInterface, _: Int ->
                 requestCameraPermissionLauncher.launch(Manifest.permission.CAMERA)
                 dialogInterface.dismiss()
-            }
-            .setNegativeButton("Cancel", null)
-            .create()
-            .show()
+            }.setNegativeButton("Cancel", null).create().show()
     }
 
     private fun launchCamera() {
@@ -135,10 +133,7 @@ class AddPhotoFragment : Fragment() {
 
 
     private fun checkForErrors(): Boolean {
-//        if (binding.editPhotoName.text.isEmpty())
-//            return true
-        if (!this::pictureAbsolutePath.isInitialized)
-            return true
+        if (!this::pictureAbsolutePath.isInitialized) return true
         return false
     }
 

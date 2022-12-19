@@ -10,7 +10,6 @@ class ProblemListsViewModel(application: Application) : AndroidViewModel(applica
     private val db: ProblemListDatabase
     val getAllProblemLists: LiveData<List<ProblemList>>
 
-    //    val getProblemListWithProblems: LiveData<List<ProblemListWithProblems>>
     val getAllProblems: LiveData<List<Problem>>
 
     init {

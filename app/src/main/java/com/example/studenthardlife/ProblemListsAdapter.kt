@@ -1,6 +1,5 @@
 package com.example.studenthardlife
 
-import android.media.Image
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -54,43 +53,4 @@ class ProblemListsAdapter() :
         return problemLists.size
     }
 }
-
-//class ProblemListsAdapter : ListAdapter<ProblemList, ProblemListsAdapter.ProblemListViewHolder>(ProblemListsComparator()) {
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemListViewHolder {
-//        println("Siemanko")
-//        return ProblemListViewHolder.create(parent)
-//    }
-//
-//    override fun onBindViewHolder(holder: ProblemListViewHolder, position: Int) {
-//        val current = getItem(position)
-//        holder.bind(current.listName)
-//    }
-//
-//    class ProblemListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-//        private val problemListItemView: TextView = itemView.findViewById(R.id.problem_list_title)
-//
-//        fun bind(text: String?) {
-//            problemListItemView.text = text
-//        }
-//
-//        companion object {
-//            fun create(parent: ViewGroup): ProblemListViewHolder {
-//                val view: View = LayoutInflater.from(parent.context)
-//                    .inflate(R.layout.problem_list_item, parent, false)
-//                return ProblemListViewHolder(view)
-//            }
-//        }
-//    }
-//
-//    class ProblemListsComparator : DiffUtil.ItemCallback<ProblemList>() {
-//        override fun areItemsTheSame(oldItem: ProblemList, newItem: ProblemList): Boolean {
-//            return oldItem === newItem
-//        }
-//
-//        override fun areContentsTheSame(oldItem: ProblemList, newItem: ProblemList): Boolean {
-//            return oldItem.listName == newItem.listName
-//        }
-//    }
-//}
 

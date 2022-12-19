@@ -17,9 +17,4 @@ interface ProblemListDao {
 
     @Query("SELECT * FROM problem_list_table")
     fun getProblemLists(): LiveData<List<ProblemList>>
-
-    @Transaction
-    @Query("SELECT * FROM problem_list_table WHERE listName = :listName")
-    // suspend?
-    fun getProblemListWithProblems(listName: String): LiveData<List<ProblemListWithProblems>>
 }
