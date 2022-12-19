@@ -12,16 +12,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studenthardlife.databinding.FragmentDetailBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DetailFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
     private lateinit var detailAdapter: DetailAdapter
     private lateinit var problemListsViewModel: ProblemListsViewModel
     private lateinit var parentListName : String
-    private lateinit var addButton : FloatingActionButton
-    private lateinit var cameraButton : FloatingActionButton
-    private lateinit var editButton : ImageView
+
+    private lateinit var binding : FragmentDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +33,9 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_detail, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
+
+        val recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -49,20 +48,20 @@ class DetailFragment : Fragment() {
         detailAdapter = DetailAdapter(parentListName)
         recyclerView.adapter = detailAdapter
 
-        addButton = view.findViewById(R.id.fab_add)
+        val addButton = binding.fabAdd
         addButton.setOnClickListener {
             findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAddProblemFragment(
                 listName = parentListName
             ))
         }
 
-        cameraButton = view.findViewById(R.id.fab_camera)
+        val cameraButton = binding.fabCamera
         cameraButton.setOnClickListener {
 //            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToAddProblemFragment(
 //                listName = parentListName
 //            ))
         }
 
-        return view
+        return binding.root
     }
 }

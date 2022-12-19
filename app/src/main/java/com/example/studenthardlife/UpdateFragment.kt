@@ -9,20 +9,21 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.studenthardlife.databinding.FragmentDetailBinding
+import com.example.studenthardlife.databinding.FragmentUpdateBinding
 
 class UpdateFragment : Fragment() {
     private lateinit var titleEditText: EditText
     private lateinit var descriptionEditText: EditText
-    private lateinit var editButton: Button
-    private lateinit var deleteButton: Button
 
     private lateinit var problemId : Number
     private lateinit var problemTitle : String
     private lateinit var problemDescription : String
     private lateinit var parentList : String
-    private lateinit var updatedProblem : Problem
 
     private val problemListsViewModel: ProblemListsViewModel by viewModels()
+
+    private lateinit var binding : FragmentUpdateBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,35 +34,31 @@ class UpdateFragment : Fragment() {
             problemDescription = it.getString("problemDescription").toString()
             parentList = it.getString("parentList").toString()
         }
-
-//         problem = ProblemLists.data[listPosition.toInt()].problems[problemPosition.toInt()]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =  inflater.inflate(R.layout.fragment_update, container, false)
+        binding = FragmentUpdateBinding.inflate(inflater, container, false)
 
         // Setting inputs to old values
-        titleEditText = view.findViewById(R.id.edit_problem_title)
+        titleEditText = binding.editProblemTitle
         titleEditText.setText(problemTitle)
 
-        descriptionEditText= view.findViewById(R.id.edit_problem_description)
+        descriptionEditText= binding.editProblemDescription
         descriptionEditText.setText(problemDescription)
 
-        editButton = view.findViewById(R.id.edit_button)
-        editButton.setOnClickListener {
+        // Setting click listeners
+        binding.editButton.setOnClickListener {
             updateProblem()
         }
 
-        deleteButton = view.findViewById(R.id.delete_button)
-        deleteButton.setOnClickListener {
+        binding.deleteButton.setOnClickListener {
             deleteProblem()
         }
 
-        // Inflate the layout for this fragment
-        return view
+        return binding.root
     }
 
     private fun updateProblem() {

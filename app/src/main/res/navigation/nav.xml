@@ -59,8 +59,8 @@
     <fragment
         android:id="@+id/addProblemFragment"
         android:name="com.example.studenthardlife.AddProblemFragment"
-        android:label="fragment_add_problem"
-        tools:layout="@layout/fragment_add_problem" >
+        android:label="Add Problem"
+        tools:layout="@layout/fragment_add_problem">
         <action
             android:id="@+id/action_addProblemFragment_to_detailFragment"
             app:destination="@id/detailFragment" />

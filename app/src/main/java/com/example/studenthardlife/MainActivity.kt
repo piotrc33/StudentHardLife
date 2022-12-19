@@ -15,11 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        val adapter = ProblemListsAdapter()
-
-//        problemListsViewModel.getAllProblemLists.observe(this) { problemLists ->
-//            problemLists?.let { adapter.setData(it) }
-//        }
 
 //        problemListsViewModel.insert(ProblemList("List2"))
 //        problemListsViewModel.insertProblem(Problem(0, "problemos", "aplikacja", "List1"))

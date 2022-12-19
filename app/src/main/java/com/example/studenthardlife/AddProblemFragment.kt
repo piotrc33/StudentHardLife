@@ -9,13 +9,17 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.studenthardlife.databinding.FragmentAddProblemBinding
+import com.example.studenthardlife.databinding.FragmentUpdateBinding
 
 class AddProblemFragment : Fragment() {
     private var listName: String? = null
     private lateinit var newProblemTitleEditText: EditText
     private lateinit var newProblemDescriptionEditText: EditText
-    private lateinit var submitButton: Button
+
     private val problemListsViewModel: ProblemListsViewModel by viewModels()
+
+    private lateinit var binding: FragmentAddProblemBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +33,14 @@ class AddProblemFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_problem, container, false)
-        newProblemTitleEditText = view.findViewById(R.id.new_problem_title)
-        newProblemDescriptionEditText = view.findViewById(R.id.new_problem_description)
-        submitButton = view.findViewById(R.id.submit_button)
-
-        submitButton.setOnClickListener {
+        binding = FragmentAddProblemBinding.inflate(inflater, container, false)
+        newProblemTitleEditText = binding.newProblemTitle
+        newProblemDescriptionEditText = binding.newProblemDescription
+        binding.submitButton.setOnClickListener {
             submitProblem()
         }
 
-        return view
+        return binding.root
     }
 
     private fun submitProblem() {
