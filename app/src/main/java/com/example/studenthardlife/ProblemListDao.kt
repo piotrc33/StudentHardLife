@@ -12,6 +12,9 @@ interface ProblemListDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertProblem(problem: Problem)
 
+    @Update
+    suspend fun updateProblemList(problemList: ProblemList)
+
     @Query("SELECT * FROM problem_list_table")
     fun getProblemLists(): LiveData<List<ProblemList>>
 

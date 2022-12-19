@@ -9,7 +9,8 @@ import kotlinx.coroutines.launch
 class ProblemListsViewModel(application: Application) : AndroidViewModel(application) {
     private val db: ProblemListDatabase
     val getAllProblemLists: LiveData<List<ProblemList>>
-//    val getProblemListWithProblems: LiveData<List<ProblemListWithProblems>>
+
+    //    val getProblemListWithProblems: LiveData<List<ProblemListWithProblems>>
     val getAllProblems: LiveData<List<Problem>>
 
     init {
@@ -19,24 +20,32 @@ class ProblemListsViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun insertList(problemList: ProblemList) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             db.problemListDao().insertProblemList(problemList)
         }
     }
 
+    fun updateList(problemList: ProblemList) {
+        viewModelScope.launch {
+            db.problemListDao().updateProblemList(problemList)
+        }
+    }
+
     fun insertProblem(problem: Problem) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             db.problemDao().insertProblem(problem)
         }
     }
+
     fun updateProblem(problem: Problem) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             db.problemDao().updateProblem(problem)
         }
     }
 
+
     fun deleteProblem(problem: Problem) {
-        viewModelScope.launch{
+        viewModelScope.launch {
             db.problemDao().deleteProblem(problem)
         }
     }

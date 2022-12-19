@@ -7,4 +7,5 @@ import androidx.room.PrimaryKey
 data class ProblemList(
     @PrimaryKey(autoGenerate = false)
     val listName : String,
+    val photoPath: String
 )

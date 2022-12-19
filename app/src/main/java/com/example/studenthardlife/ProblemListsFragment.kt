@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.studenthardlife.databinding.FragmentProblemListsBinding
 
 // Fragments are files between which jetpack navigation is possible
 class ProblemListsFragment : Fragment() {
@@ -16,13 +18,16 @@ class ProblemListsFragment : Fragment() {
     private lateinit var problemListsAdapter: ProblemListsAdapter
     private lateinit var problemListsViewModel: ProblemListsViewModel
 
+    private lateinit var binding: FragmentProblemListsBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_problem_lists, container, false)
-        recyclerView = view.findViewById(R.id.recyclerView)
+        binding = FragmentProblemListsBinding.inflate(inflater, container, false)
+
+        recyclerView = binding.recyclerView
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
@@ -35,6 +40,11 @@ class ProblemListsFragment : Fragment() {
         problemListsAdapter = ProblemListsAdapter()
         recyclerView.adapter = problemListsAdapter
 
-        return view
+        binding.fabAddList.setOnClickListener {
+            findNavController().navigate(ProblemListsFragmentDirections.actionProblemListsFragmentToAddListFragment())
+        }
+
+        return binding.root
     }
+
 }

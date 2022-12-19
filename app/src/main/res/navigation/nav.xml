@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_problemListsFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_problemListsFragment_to_addListFragment"
+            app:destination="@id/addListFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_detailFragment_to_addProblemFragment"
             app:destination="@id/addProblemFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_addPhotoFragment"
+            app:destination="@id/addPhotoFragment" />
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
@@ -67,5 +73,26 @@
         <argument
             android:name="listName"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPhotoFragment"
+        android:name="com.example.studenthardlife.AddPhotoFragment"
+        android:label="Add Photo"
+        tools:layout="@layout/fragment_add_photo">
+        <argument
+            android:name="listName"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_addPhotoFragment_to_problemListsFragment"
+            app:destination="@id/problemListsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addListFragment"
+        android:name="com.example.studenthardlife.AddListFragment"
+        android:label="Add List"
+        tools:layout="@layout/fragment_add_list">
+        <action
+            android:id="@+id/action_addListFragment_to_problemListsFragment"
+            app:destination="@id/problemListsFragment" />
     </fragment>
 </navigation>
